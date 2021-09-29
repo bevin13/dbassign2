@@ -41,30 +41,28 @@ cur4 = con.execute("UPDATE EMPLOYEE SET EMP_name = '"+ q +"'where EMP_id = '"+ j
 cur = con.execute("SELECT * from EMPLOYEE")
 print(cur.fetchall())
 
-con1 = sqlite3.connect('departments.db')
-cur5 = con1.cursor()
+cur5 = con.cursor()
 cur5.execute("DROP TABLE IF EXISTS DEPARTMENTS ")
 dep = """CREATE TABLE DEPARTMENTS(
          Department_id INTEGER NOT NULL,
          Department_name CHAR(20) NOT NULL)"""
 cur5.execute(dep)
 
-con1.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
+con.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
                  "VALUES (102,'Front-end')")
-con1.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
+con.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
                  "VALUES (105,'Back-end')")
-con1.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
+con.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
                  "VALUES (201,'Full-stack')")
-con1.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
+con.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
                  "VALUES (307,'App Developement')")
-con1.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
+con.execute("INSERT  INTO DEPARTMENTS (Department_id,Department_name) " 
                  "VALUES (305,'Game Developement')")
-con1.commit()
+con.commit()
 cur5.execute("SELECT * from DEPARTMENTS")
 print(cur5.fetchall())
 
 n = input("Enter the Department ID : ")
-print(con1.execute("Select EMP_name,EMP_id,EMP_salary,EMPLOYEE.Department_id,CITY,Department_name from EMPLOYEE,DEPARTMENTS where EMPLOYEE.Department_id== '"+ n +"' and DEPARTMENTS.Department_id== '"+ n +"'" ).fetchall())
+print(con.execute("Select EMP_name,EMP_id,EMP_salary,EMPLOYEE.Department_id,CITY,Department_name from EMPLOYEE,DEPARTMENTS where EMPLOYEE.Department_id== '"+ n +"' and DEPARTMENTS.Department_id== '"+ n +"'" ).fetchall())
 
 con.close()
-con1.close()
